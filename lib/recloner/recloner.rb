@@ -1,7 +1,6 @@
 module Recloner
   def clone(&block)
     block ||= Proc.new {}
-    
     property_names = properties.map(&:name) - protected_properties.map(&:name)
     attrs = property_names.inject({}){|hash, x| 
       val = send(x)
@@ -10,5 +9,12 @@ module Recloner
       hash
     }
     self.class.new(attrs).tap(&block)
+  end
+
+  def clone!(&block)
+    block ||= Proc.new {}
+    next_id = database.server.next_uuid 
+    copy next_id
+    self.class.get(next_id).tap(&block).tap {|d| d.save}
   end
 end
