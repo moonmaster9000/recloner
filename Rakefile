@@ -11,7 +11,7 @@ begin
     gemspec.files       = FileList['lib/**/*.rb', 'readme.markdown']
     gemspec.homepage    = "http://github.com/moonmaster9000/recloner"
     gemspec.authors     = ["Matt Parker"]
-    gemspec.add_dependency('couchrest_model', '1.0.0.beta7')
+    gemspec.add_dependency('couchrest_model', '~> 1.0.0')
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
